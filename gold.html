@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄金逼近$5,600：深度复盘与六大驱动 | 2026年1月29日</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- Application Structure Plan:
+         1. Hero Section: "Parabolic" context ($5594 high) with visual urgency.
+         2. Market Pulse: Real-time data ($5560, SGE 1248) + Parabolic Chart.
+         3. Core Logic (UPDATED): The "6 Major Drivers" from the research doc (Rate cuts, Opportunity Cost, Central Banks, Geopolitics, Momentum/Herd, ETF Access).
+         4. Investment Map: Tabbed interface for SGE, COMEX, Stocks.
+         5. Risk Radar: High-level risks (Margin calls, Crowded trade).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#FDFBF7',
+                            100: '#FBF6E9',
+                            400: '#E6C268',
+                            500: '#D4AF37',
+                            600: '#B5922B',
+                            700: '#8A6D1C',
+                        },
+                        navy: {
+                            800: '#1E293B',
+                            900: '#0F172A',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F8FAFC; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; height: 350px; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1); }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="text-slate-700 antialiased selection:bg-gold-200 selection:text-navy-900">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gold-500 rounded-full flex items-center justify-center text-white font-bold mr-2">Au</div>
+                    <span class="font-serif font-bold text-xl text-navy-900 tracking-tight">2026 黄金指南</span>
+                    <span class="ml-3 px-2 py-0.5 bg-red-100 text-red-700 text-xs font-bold rounded-full animate-pulse">$5,560 新高</span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center text-sm font-medium">
+                    <a href="#market" class="text-slate-500 hover:text-gold-600 transition-colors">极值行情</a>
+                    <a href="#logic" class="text-slate-500 hover:text-gold-600 transition-colors">六大驱动</a>
+                    <a href="#invest" class="text-slate-500 hover:text-gold-600 transition-colors">投资地图</a>
+                    <a href="#risk" class="text-slate-500 hover:text-gold-600 transition-colors">高位风控</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-navy-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 text-center">
+            <div class="inline-flex items-center px-3 py-1 mb-6 text-xs font-semibold tracking-wider text-gold-400 uppercase bg-navy-800 rounded-full border border-navy-700 shadow-lg">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-ping"></span>
+                2026年1月29日 · 抛物线行情确认
+            </div>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+                见证历史：金价逼近 <span class="text-gold-500">$5,600</span><br/>
+                疯狂之后仓位如何安放？
+            </h1>
+            <p class="mt-4 max-w-3xl mx-auto text-xl text-slate-300 font-light">
+                国内金价突破 <span class="font-mono text-white">1,240元/克</span>。<br>
+                从“通胀对冲”到“终极避险”，这不仅是创新高，更是逻辑的彻底重构。
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#logic" class="px-8 py-3 bg-gold-500 hover:bg-gold-600 text-white font-semibold rounded-lg shadow-lg shadow-gold-500/30 transition-all">
+                    解读六大上涨原因
+                </a>
+                <a href="#risk" class="px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg backdrop-blur border border-white/10 transition-all">
+                    高位风控策略
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: Market Pulse -->
+    <section id="market" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-navy-900">市场行情：抛物线式加速</h2>
+                <p class="mt-4 text-lg text-slate-600">
+                    <span class="text-slate-400">时间：</span> 2026年1月29日 
+                    <span class="mx-2">|</span> 
+                    <span class="bg-red-50 text-red-700 px-2 py-1 rounded font-medium border border-red-100">年内涨幅 >27%</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Data Cards -->
+                <div class="space-y-4">
+                    <!-- International Gold -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-gold-100 rounded-bl-full -mr-8 -mt-8"></div>
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase">伦敦现货金 (XAU/USD)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-4xl font-bold text-navy-900 font-mono">$5,560</span>
+                            <span class="ml-2 text-sm text-slate-500">/oz</span>
+                        </div>
+                        <div class="mt-3 flex justify-between text-xs text-slate-500">
+                            <span>日高: <b class="text-navy-900">$5,594.82</b></span>
+                            <span>2025全年涨幅: <b class="text-green-600">64%</b></span>
+                        </div>
+                    </div>
+
+                    <!-- China Gold -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase">上海金 (SGE)</h3>
+                        <div class="flex items-baseline mt-2">
+                            <span class="text-4xl font-bold text-navy-900 font-mono">¥1,248.22</span>
+                            <span class="ml-2 text-sm text-slate-500">/克 (午盘)</span>
+                        </div>
+                        <div class="mt-4 space-y-2 border-t border-slate-200 pt-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600">Au(T+D)</span>
+                                <span class="font-mono font-bold text-gold-700">1,245.40 元/克</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Macro Anchor -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase">关键指标</h3>
+                        <div class="grid grid-cols-2 gap-4 mt-2">
+                            <div>
+                                <div class="text-xs text-slate-400">美元指数 (DXY)</div>
+                                <div class="text-xl font-bold text-navy-900">96.06</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">年化波动率</div>
+                                <div class="text-xl font-bold text-red-600">21.3%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Chart -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-lg flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-navy-900">2025-2026 价格走势 (抛物线特征)</h3>
+                        <span class="text-xs px-2 py-1 bg-gold-100 text-gold-700 rounded font-bold">高潮运行 (Climax Run)</span>
+                    </div>
+                    <div class="chart-container flex-grow">
+                        <canvas id="parabolicChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Six Core Drivers (UPDATED) -->
+    <section id="logic" class="py-16 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-navy-900">六大合力：导演这场大戏的幕后推手</h2>
+                <p class="mt-4 text-lg text-slate-600">为什么价格这么高还有人买？因为这不是单一逻辑，而是<span class="font-bold text-gold-600">“完美风暴”</span>。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Driver 1: Rate Cuts -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500 card-hover">
+                    <div class="text-3xl mb-3">📉</div>
+                    <h3 class="font-bold text-lg text-navy-900">1. 降息预期下的资产普涨</h3>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                        全球进入降息周期，法币购买力相对贬值。流动性宽松预期导致“水涨船高”，黄金作为“硬通货”，自然享受资产价格普涨的红利。
+                    </p>
+                </div>
+
+                <!-- Driver 2: Opportunity Cost -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500 card-hover">
+                    <div class="text-3xl mb-3">⚖️</div>
+                    <h3 class="font-bold text-lg text-navy-900">2. 持有机会成本降低</h3>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                        黄金不生息，其最大敌人是高利率。随着美债收益率回落和实际利率下行，持有黄金的“惩罚”变小了，直接推升了其估值中枢。
+                    </p>
+                </div>
+
+                <!-- Driver 3: Central Bank -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-gold-500 card-hover">
+                    <div class="text-3xl mb-3">🏦</div>
+                    <h3 class="font-bold text-lg text-navy-900">3. 央行购金：慢变量压舱</h3>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                        2025年央行净购金 <span class="font-bold text-navy-900">863.3吨</span>。央行买入不是为了炒作，而是“储备多元化”和“去美元化”。这锁定了大量流动性，提供了坚实底部。
+                    </p>
+                </div>
+
+                <!-- Driver 4: Safe Haven -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-red-500 card-hover">
+                    <div class="text-3xl mb-3">🛡️</div>
+                    <h3 class="font-bold text-lg text-navy-900">4. 避险升级：终极信任锚</h3>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                        不仅仅是地缘冲突。市场开始担忧美国政策的不确定性和信用货币体系的摇摆。黄金从“战术避险”升级为“制度性避险”。
+                    </p>
+                </div>
+
+                <!-- Driver 5: Herd Effect -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-red-500 card-hover">
+                    <div class="text-3xl mb-3">🐑</div>
+                    <h3 class="font-bold text-lg text-navy-900">5. 羊群效应与算法追涨</h3>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                        <span class="font-bold text-red-600">动量—资金—动量</span>的正反馈循环。CTA策略和量化基金在突破关键点位后自动买入，空头止损进一步推高价格，形成“逼空”。
+                    </p>
+                </div>
+
+                <!-- Driver 6: ETF Expansion -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-gold-500 card-hover">
+                    <div class="text-3xl mb-3">🎫</div>
+                    <h3 class="font-bold text-lg text-navy-900">6. ETF扩容与工具便利</h3>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                        2025年ETF净流入 <span class="font-bold text-navy-900">$890亿</span>。微型合约和各类ETF让欧美大众资金像买股票一样配置黄金，极大地降低了入场门槛，助推行情爆发。
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Investment Map -->
+    <section id="invest" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-navy-900">投资地图：实操指南</h2>
+                <p class="mt-4 text-lg text-slate-600">面对 1240元/克 的价格，闭眼买入时代结束，现在考验<span class="font-bold">工具选择</span>。</p>
+            </div>
+
+            <div class="flex justify-center mb-8 overflow-x-auto hide-scroll">
+                <div class="flex space-x-2 bg-slate-100 p-1 rounded-xl">
+                    <button onclick="switchTab('sge')" id="tab-sge" class="px-6 py-2.5 rounded-lg text-sm font-bold bg-white text-navy-900 shadow-sm ring-1 ring-slate-200">上金所 (实物/延期)</button>
+                    <button onclick="switchTab('comex')" id="tab-comex" class="px-6 py-2.5 rounded-lg text-sm font-medium text-slate-500 hover:text-navy-900">美盘 (期货/期权)</button>
+                    <button onclick="switchTab('stock')" id="tab-stock" class="px-6 py-2.5 rounded-lg text-sm font-medium text-slate-500 hover:text-navy-900">股票/ETF</button>
+                </div>
+            </div>
+
+            <!-- SGE Content -->
+            <div id="content-sge" class="tab-content block">
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900 mb-2">Au(T+D) & mAu(T+D)</h3>
+                            <div class="text-xs bg-gold-100 text-gold-800 inline-block px-2 py-1 rounded mb-4">带杠杆 · 可多可空</div>
+                            <table class="w-full text-sm text-left">
+                                <tbody class="divide-y divide-slate-200 bg-white border rounded">
+                                    <tr><td class="p-3 text-slate-500">最新价格</td><td class="p-3 font-mono font-bold">1,245.40 元/克</td></tr>
+                                    <tr><td class="p-3 text-slate-500">保证金</td><td class="p-3 font-bold text-red-600">16%</td></tr>
+                                    <tr><td class="p-3 text-slate-500">延期费</td><td class="p-3">万分之 1.75 / 日</td></tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-slate-500 mt-2">mAu(T+D) 交易单位仅100克，是个人投资者进行风控的神器。</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-navy-900 mb-2">Au99.99 (现货实盘)</h3>
+                            <div class="text-xs bg-green-100 text-green-800 inline-block px-2 py-1 rounded mb-4">钱货两讫 · T+0</div>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start"><span class="mr-2 text-gold-500">●</span>国内最核心的现货锚点。</li>
+                                <li class="flex items-start"><span class="mr-2 text-gold-500">●</span>最新价: <span class="font-bold">1,243.01 元/克</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMEX Content -->
+            <div id="content-comex" class="tab-content hidden">
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-navy-900">GC (标准合约)</h4>
+                            <p class="text-2xl font-mono mt-2 text-gold-600">100 oz</p>
+                            <p class="text-xs text-slate-500 mt-1">名义价值 ~$56万</p>
+                            <p class="text-xs text-slate-400 mt-2">机构对冲首选</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-l-gold-500 shadow-sm">
+                            <h4 class="font-bold text-navy-900">MGC (微型合约)</h4>
+                            <p class="text-2xl font-mono mt-2 text-gold-600">10 oz</p>
+                            <p class="text-xs text-slate-500 mt-1">名义价值 ~$5.6万</p>
+                            <p class="text-xs text-red-500 font-bold mt-2">个人精细对冲神器</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-navy-900">期权 (Options)</h4>
+                            <p class="text-xs text-slate-500 mt-2">Protective Put (保护性看跌期权)</p>
+                            <p class="text-xs text-slate-500 mt-1">给持仓上“保险”，锁死最大回撤。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stock Content -->
+            <div id="content-stock" class="tab-content hidden">
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 p-8">
+                    <h3 class="text-xl font-bold text-navy-900 mb-4">股票与ETF</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <span class="font-bold w-20 flex-shrink-0">A股:</span>
+                            <span>紫金矿业、山东黄金、场内ETF (低门槛T+0)。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="font-bold w-20 flex-shrink-0">美股:</span>
+                            <span>GLD/IAU (实物ETF，流动性最好)，GDX (矿业ETF)。</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-red-50 text-red-800 text-xs rounded">
+                        注意：矿业股受经营风险影响，波动可能异于金价。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Risk Radar -->
+    <section id="risk" class="py-16 bg-navy-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-serif font-bold mb-6">高位风控：<br/><span class="text-gold-500">盛宴背后的阴影</span></h2>
+                    <p class="text-slate-300 mb-8">“抛物线式上涨意味着回撤可能不远。” —— Reuters</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                            <h4 class="font-bold text-gold-400 mb-1">1. 宏观反转 (The Gray Rhino)</h4>
+                            <p class="text-sm text-slate-300">如果通胀意外回升导致降息落空，或美元突然转强，金价估值逻辑将重估。</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                            <h4 class="font-bold text-gold-400 mb-1">2. 交易拥挤 (Crowded Trade)</h4>
+                            <p class="text-sm text-slate-300">ETF持仓创纪录。一旦情绪反转，踩踏式赎回将导致崩盘。</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                            <h4 class="font-bold text-gold-400 mb-1">3. 制度冲击 (Margin Call)</h4>
+                            <p class="text-sm text-slate-300">波动加剧时，交易所可能提高保证金比例，强制清洗高杠杆多头。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white text-navy-900 rounded-2xl p-8 shadow-2xl border-4 border-gold-500">
+                    <h3 class="text-xl font-bold mb-6 border-b pb-4">🛡️ 实战防范策略</h3>
+                    <ul class="space-y-6">
+                        <li class="flex">
+                            <span class="w-8 h-8 rounded-full bg-navy-100 text-navy-800 flex items-center justify-center font-bold mr-4">A</span>
+                            <div>
+                                <h4 class="font-bold">仓位管理</h4>
+                                <p class="text-sm text-slate-600">设定固定上限（如15%）。涨多了再平衡，跌多了补仓。用仓位代替观点。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <span class="w-8 h-8 rounded-full bg-navy-100 text-navy-800 flex items-center justify-center font-bold mr-4">B</span>
+                            <div>
+                                <h4 class="font-bold">利用对冲工具</h4>
+                                <p class="text-sm text-slate-600">手持现货/ETF底仓时，可用 <span class="font-bold text-red-600">mAu(T+D)</span> 或 <span class="font-bold text-red-600">MGC</span> 做空头保护。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <span class="w-8 h-8 rounded-full bg-navy-100 text-navy-800 flex items-center justify-center font-bold mr-4">C</span>
+                            <div>
+                                <h4 class="font-bold">严设止损</h4>
+                                <p class="text-sm text-slate-600">对于杠杆交易，必须设置严格止损线，切忌扛单。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-50 border-t border-slate-200 py-12 mt-12 text-center text-slate-500 text-xs">
+        <p>© 2026 黄金投资指南 | 数据来源：Reuters, SGE, WGC (截至2026-01-29)</p>
+        <p class="mt-2">免责声明：本文仅供研究参考，不构成投资建议。</p>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('block'));
+            ['sge', 'comex', 'stock'].forEach(btn => {
+                document.getElementById('tab-' + btn).className = "px-6 py-2.5 rounded-lg text-sm font-medium text-slate-500 hover:text-navy-900";
+            });
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+            document.getElementById('content-' + tabId).classList.add('block');
+            document.getElementById('tab-' + tabId).className = "px-6 py-2.5 rounded-lg text-sm font-bold bg-white text-navy-900 shadow-sm ring-1 ring-slate-200";
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('parabolicChart').getContext('2d');
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(220, 38, 38, 0.2)');
+            gradient.addColorStop(1, 'rgba(212, 175, 55, 0.0)');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['25年1月', '3月', '5月', '7月', '9月', '11月', '26年1月'],
+                    datasets: [{
+                        label: '金价 (USD/oz)',
+                        data: [3390, 3550, 3820, 4250, 4800, 5250, 5560],
+                        borderColor: '#DC2626',
+                        backgroundColor: gradient,
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { min: 3000, ticks: { callback: v => '$' + v }, grid: { borderDash: [2, 4] } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
