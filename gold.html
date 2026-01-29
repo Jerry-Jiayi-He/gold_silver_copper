@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>黄金逼近$5,600：深度复盘与全景投资地图 | 2026年1月29日</title>
+    <title>黄金逼近$5,600：全景投资指南 (专业版) | 2026.01.29</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     
-    <!-- Application Structure Plan:
-         1. Hero Section: Parabolic context ($5594 high).
+    <!-- Application Structure:
+         1. Hero: Parabolic context ($5594 high).
          2. Market Pulse: Real-time data ($5560, SGE 1248).
-         3. Core Logic: 6 Major Drivers.
-         4. Investment Map (COMPLETELY OVERHAULED): 
-            - Tab 1: SGE (Au9999, T+D, mAu)
-            - Tab 2: Futures (SHFE vs COMEX) - NEW
-            - Tab 3: Stocks/ETFs (A-share, HK, US GDX/GLD) - NEW
-            - Tab 4: Forex (XAU/USD) - NEW
-         5. Risk Radar: High-level risks.
+         3. Logic: 6 Drivers.
+         4. Investment Map (Refined): 
+            - SGE: Added mAu price and Spread analysis (Contango).
+            - Futures: Highlighted Night Session for SHFE.
+            - Stocks/Forex: Complete coverage.
+         5. Risk: Margin Call & Crowded Trade.
     -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <script>
         tailwind.config = {
@@ -54,10 +52,9 @@
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Custom Tab Styles */
-        .tab-btn-active { background-color: #ffffff; color: #0F172A; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); border: 1px solid #E2E8F0; font-weight: 700; }
-        .tab-btn-inactive { color: #64748B; font-weight: 500; }
-        .tab-btn-inactive:hover { color: #0F172A; }
+        .tab-btn-active { background-color: #ffffff; color: #0F172A; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); border: 1px solid #E2E8F0; font-weight: 700; border-bottom: 3px solid #D4AF37; }
+        .tab-btn-inactive { color: #64748B; font-weight: 500; background-color: transparent; border: 1px solid transparent; }
+        .tab-btn-inactive:hover { color: #0F172A; background-color: #F1F5F9; }
     </style>
 </head>
 <body class="text-slate-700 antialiased selection:bg-gold-200 selection:text-navy-900">
@@ -149,6 +146,11 @@
                                 <span class="text-slate-600">Au(T+D)</span>
                                 <span class="font-mono font-bold text-gold-700">1,245.40 元/克</span>
                             </div>
+                            <!-- Added Refinement: Spread -->
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500 text-xs">期现升水</span>
+                                <span class="font-mono text-xs text-red-500 font-bold">+2.39 (多头情绪强)</span>
+                            </div>
                         </div>
                     </div>
 
@@ -191,7 +193,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Drivers 1-6 Cards (Condensed for brevity, same content logic as previous) -->
+                <!-- Drivers 1-6 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500 card-hover">
                     <div class="text-3xl mb-3">📉</div>
                     <h3 class="font-bold text-lg text-navy-900">1. 降息预期下的资产普涨</h3>
@@ -259,11 +261,17 @@
                             
                             <table class="w-full text-sm text-left mb-4">
                                 <tbody class="divide-y divide-slate-100">
-                                    <tr><td class="py-2 text-slate-500">最新价格</td><td class="py-2 font-mono font-bold text-right">1,245.40 元/克</td></tr>
+                                    <tr><td class="py-2 text-slate-500">Au(T+D) 最新价</td><td class="py-2 font-mono font-bold text-right text-navy-900">1,245.40 元/克</td></tr>
+                                    <!-- Added mAu price -->
+                                    <tr><td class="py-2 text-slate-500">mAu(T+D) 最新价</td><td class="py-2 font-mono font-bold text-right text-navy-900">1,244.00 元/克</td></tr>
                                     <tr><td class="py-2 text-slate-500">保证金</td><td class="py-2 font-bold text-red-600 text-right">16%</td></tr>
-                                    <tr><td class="py-2 text-slate-500">延期费</td><td class="py-2 text-right">万分之 1.75 / 日</td></tr>
                                 </tbody>
                             </table>
+
+                            <div class="flex justify-between items-center text-xs bg-slate-50 p-2 rounded mb-4">
+                                <span class="text-slate-500">期现升水 (T+D - 现货)</span>
+                                <span class="font-bold text-red-500">+2.39 元/克</span>
+                            </div>
                             
                             <div class="bg-blue-50 border border-blue-100 rounded-lg p-3">
                                 <h4 class="font-bold text-blue-800 text-xs mb-1">💡 个人风控神器: mAu(T+D)</h4>
@@ -277,7 +285,7 @@
                             <div class="text-xs text-slate-500 mb-4">钱货两讫 · T+0 · 实物交割</div>
                             <ul class="space-y-3 text-sm text-slate-600">
                                 <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>国内现货价格锚点</li>
-                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>无杠杆，无隔夜费</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>最新价: <span class="font-bold text-navy-900">1,243.01 元/克</span></li>
                                 <li class="flex items-center"><span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>适合长期定投或金店进货</li>
                             </ul>
                             <div class="mt-6 pt-4 border-t border-slate-100 text-center">
@@ -303,7 +311,7 @@
                                 <h4 class="font-bold text-md mb-2">黄金期货 (Au)</h4>
                                 <ul class="text-sm space-y-2 text-slate-600">
                                     <li>• <span class="font-bold">单位：</span>1000克/手</li>
-                                    <li>• <span class="font-bold">优势：</span>人民币计价，含夜盘，覆盖美盘活跃时段。</li>
+                                    <li>• <span class="font-bold">时间：</span><span class="bg-slate-100 px-1 rounded text-xs">含夜盘</span> (覆盖美盘活跃时段)</li>
                                     <li>• <span class="font-bold">适用：</span>专业机构、产业客户套保。</li>
                                 </ul>
                             </div>
@@ -331,13 +339,6 @@
                                     <p class="text-xs text-slate-600">
                                         名义价值约 <span class="font-bold">$5.6万</span>。个人投资者进行精细化对冲的最佳工具（如对冲50oz现货，做空5手MGC）。
                                     </p>
-                                </div>
-                                <div class="bg-white p-4 rounded-xl border border-slate-200">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <h4 class="font-bold text-md">Gold Options</h4>
-                                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">100 盎司</span>
-                                    </div>
-                                    <p class="text-xs text-slate-500">保护性看跌期权 (Protective Put)，为持仓上保险。</p>
                                 </div>
                             </div>
                         </div>
